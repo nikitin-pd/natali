@@ -1,0 +1,37 @@
+<style>
+    input {
+        width: 310px;
+        height: 60px;
+        background-color: white;
+        border: 5px solid black;
+        font-size: xx-large;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
+
+    input:hover {
+        background: #5A009D;
+        color: white;
+        font-size: xx-large;
+    }
+</style>
+<div class="btn-group">
+    <a href="{% url 'newsite:profile' %}"><input style="background-color: #5A009D; color: white;" type='button' value='💻 ПРОФИЛЬ 💻'></a>
+    <a href="{% url 'newsite:main' %}"><input type='submit' value='💅 УСЛУГИ 💅'></a>
+    <a href="{% url 'newsite:contacts' %}"><input type='submit' value='📱 КОНТАКТЫ 📱'></a>
+    <a href="{% url 'newsite:cart' %}"><input type='submit' value='🛒 КОРЗИНА ({{ services_count }}) 🛒'></a>
+</div>
+
+    <form action="{% url 'newsite:logout_page' %}">
+        <h3><button>
+                ❌Выйти❌
+            </button></h3>
+    </form>
+{% if history != 0 %}
+    <h3>История заказов</h3>
+    <h3>--------------------</h3>
+    {% for i in history %}
+        <h3>Заказ №{{ i.id }} {{i.status}}</h3>
+        <h3>{{ i.cost }} грн.</h3>
+        <h3>--------------------</h3>
+    {% endfor %}
+{% endif %}

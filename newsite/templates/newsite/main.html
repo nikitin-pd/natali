@@ -1,0 +1,38 @@
+<style>
+    input {
+        width: 310px;
+        height: 60px;
+        background-color: white;
+        border: 5px solid black;
+        font-size: xx-large;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
+
+    input:hover {
+        background:  #5A009D;
+        color: white;
+        font-size: xx-large;
+    }
+</style>
+{% if flag == False %}
+<div class="btn-group">
+    <a href="{% url 'newsite:login_page' %}"><input type='submit' value='💻 АВТОРИЗАЦИЯ 💻'></a>
+    <a href="{% url 'newsite:main' %}"><input style="background-color: #5A009D; color: white;"  type='button' value='💅 УСЛУГИ 💅'></a>
+    <a href="{% url 'newsite:contacts' %}"><input type='submit' value='📱 КОНТАКТЫ 📱'></a>
+    <a href="{% url 'newsite:cart' %}"><input type='submit' value='🛒 КОРЗИНА ({{ services_count }}) 🛒'></a>
+</div>
+{% elif flag == True %}
+<div class="btn-group">
+    <a href="{% url 'newsite:profile' %}"><input type='submit' value='💻 ПРОФИЛЬ 💻'></a>
+    <a href="{% url 'newsite:main' %}"><input style="background-color: #5A009D; color: white;"  type='button' value='💅 УСЛУГИ 💅'></a>
+    <a href="{% url 'newsite:contacts' %}"><input type='submit' value='📱 КОНТАКТЫ 📱'></a>
+    <a href="{% url 'newsite:cart' %}"><input type='submit' value='🛒 КОРЗИНА ({{ services_count }}) 🛒'></a>
+</div>
+{% endif %}
+{% for i in services %}
+    <h3>{{ i.service_name }}<br>
+    <div class="btn-group">
+        <h3>{{ i.service_price }} грн.</h3><a href="{% url 'newsite:add_service' i.id 1 %}"><input
+                style="width: 45px; height: 30px; font-size: medium; border: 2px solid black;" type='submit' value='➕'></a>
+    </div>
+{% endfor %}

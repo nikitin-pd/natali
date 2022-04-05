@@ -1,0 +1,35 @@
+<style>
+    input {
+        width: 310px;
+        height: 60px;
+        background-color: white;
+        border: 5px solid black;
+        font-size: xx-large;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
+
+    input:hover {
+        background: #5A009D;
+        color: white;
+        font-size: xx-large;
+    }
+
+    form {
+        color: black;
+        font-size: xx-large;
+    }
+</style>
+
+<div class="btn-group">
+    <a href="{% url 'newsite:login_page' %}"><input style="background-color: #5A009D; color: white;" type='button'
+            value='💻 АВТОРИЗАЦИЯ 💻'></a>
+    <a href="{% url 'newsite:main' %}"><input type='submit' value='💅 УСЛУГИ 💅'></a>
+    <a href="{% url 'newsite:contacts' %}"><input type='submit' value='📱 КОНТАКТЫ 📱'></a>
+    <a href="{% url 'newsite:cart' %}"><input type='submit' value='🛒 КОРЗИНА ({{ services_count }}) 🛒'></a>
+</div>
+<h1>Некорректно был введён логин или пароль</h1>
+<form method="POST" class="post-form">{% csrf_token %}
+    <h3>{{ form.as_p }}</h3>
+    <input type='submit' value='👍 ВОЙТИ 👍'>
+</form>
+<a href="{% url 'newsite:reg_page' %}"><input type='submit' value='👉 РЕГИСТРАЦИЯ 👈'></a>

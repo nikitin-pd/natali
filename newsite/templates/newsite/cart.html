@@ -1,0 +1,53 @@
+<style>
+    input {
+        width: 310px;
+        height: 60px;
+        background-color: white;
+        border: 5px solid black;
+        font-size: xx-large;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
+
+    input:hover {
+        background: #5A009D;
+        color: white;
+        font-size: xx-large;
+    }
+</style>
+{% if flag == False %}
+<div class="btn-group">
+    <a href="{% url 'newsite:login_page' %}"><input type='submit' value='💻 АВТОРИЗАЦИЯ 💻'></a>
+    <a href="{% url 'newsite:main' %}"><input type='submit' value='💅 УСЛУГИ 💅'></a>
+    <a href="{% url 'newsite:contacts' %}"><input type='submit' value='📱 КОНТАКТЫ 📱'></a>
+    <a href="{% url 'newsite:cart' %}"><input style="background-color: #5A009D; color: white;" type='button'
+            value='🛒 КОРЗИНА ({{ services_count }}) 🛒'></a>
+</div>
+{% elif flag == True %}
+<div class="btn-group">
+    <a href="{% url 'newsite:profile' %}"><input type='submit' value='💻 ПРОФИЛЬ 💻'></a>
+    <a href="{% url 'newsite:main' %}"><input type='submit' value='💅 УСЛУГИ 💅'></a>
+    <a href="{% url 'newsite:contacts' %}"><input type='submit' value='📱 КОНТАКТЫ 📱'></a>
+    <a href="{% url 'newsite:cart' %}"><input style="background-color: #5A009D; color: white;" type='button' value='🛒 КОРЗИНА ({{ services_count }}) 🛒'></a>
+</div>
+{% endif %}
+{% for i in finally_dict.values %}
+<h3>{{ i.1 }}<br></h3>
+<h3>{{ i.2 }} грн. {{ i.3 }} шт.</h3>
+</form>
+<div class="btn-group">
+    <a href="{% url 'newsite:add_service' i.0 2 %}"><input style="width: 45px; height: 30px; font-size: medium; border: 2px solid black;" type='submit' value='➕'></a>
+    <a href="{% url 'newsite:del_service' i.0 %}"><input style="width: 45px; height: 30px; font-size: medium; border: 2px solid black;" type='submit' value='➖'></a>
+</div>
+{% endfor %}
+{% if cost != 0 %}
+    <h3>--------------------</h3>
+    <h3>Суммарно {{cost}} грн.</h3>
+    {% if flag == False %}
+    <h3>Для заказа необходимо авторизоваться</h3>
+    {% elif flag == True %}
+    <a href="{% url 'newsite:create_order'%}"><input
+            style="width: 100px; height: 40px; font-size: medium; border: 2px solid black;" type='submit' value='ЗАКАЗАТЬ'></a>
+    {% endif %}
+{% elif cost == 0 %}
+    <h3>Тут ещё ничего нет 😔</h3>
+{% endif %}
